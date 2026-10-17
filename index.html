@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-900 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prep Test 4to Medio - Inglés I Semestre</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar for better aesthetics */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col font-sans antialiased selection:bg-sky-500 selection:text-white">
+
+  <!-- Header -->
+  <header class="bg-slate-800/80 backdrop-blur border-b border-slate-700/60 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-sky-500/20">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold leading-tight">Estudio Exprés 4to Medio</h1>
+          <p class="text-xs text-slate-400">Prueba Semestral de Inglés (40 Preguntas)</p>
+        </div>
+      </div>
+      
+      <!-- Live Score & Timer -->
+      <div class="flex items-center space-x-4">
+        <div class="hidden sm:flex items-center space-x-2 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-700">
+          <i class="fa-regular fa-clock text-sky-400"></i>
+          <span id="timer" class="font-mono font-medium text-slate-200 text-sm">00:00</span>
+        </div>
+        <div class="flex items-center space-x-2 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-700">
+          <i class="fa-solid fa-trophy text-amber-400"></i>
+          <span class="text-xs text-slate-400 hidden md:inline">Puntaje:</span>
+          <span id="score-counter" class="font-bold text-sky-400">0</span>
+          <span class="text-slate-500 text-xs">/ 40</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-6xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+    
+    <!-- Sidebar Navigation & Category Filter -->
+    <aside class="lg:col-span-1 space-y-4">
+      <div class="bg-slate-800 border border-slate-700/60 rounded-2xl p-4 shadow-xl">
+        <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Filtro por Secciones</h2>
+        <nav class="space-y-1" id="category-filters">
+          <button data-cat="all" class="cat-btn w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition flex items-center justify-between bg-sky-500/10 text-sky-400 border border-sky-500/30">
+            <span><i class="fa-solid fa-layer-group mr-2"></i>Todas (40)</span>
+            <span class="badge text-xs px-2 py-0.5 rounded-full bg-sky-500/20">40</span>
+          </button>
+          <button data-cat="rhetorical" class="cat-btn w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition flex items-center justify-between text-slate-300 hover:bg-slate-700/50">
+            <span><i class="fa-solid fa-quote-left mr-2"></i>Rhetorical Devices</span>
+            <span class="badge text-xs px-2 py-0.5 rounded-full bg-slate-700">6</span>
+          </button>
+          <button data-cat="passive" class="cat-btn w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition flex items-center justify-between text-slate-300 hover:bg-slate-700/50">
+            <span><i class="fa-solid fa-repeat mr-2"></i>Present Perfect Passive</span>
+            <span class="badge text-xs px-2 py-0.5 rounded-full bg-slate-700">6</span>
+          </button>
+          <button data-cat="vocab" class="cat-btn w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition flex items-center justify-between text-slate-300 hover:bg-slate-700/50">
+            <span><i class="fa-solid fa-book mr-2"></i>Vocabulary Units II-III</span>
+            <span class="badge text-xs px-2 py-0.5 rounded-full bg-slate-700">8</span>
+          </button>
+          <button data-cat="grammar" class="cat-btn w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition flex items-center justify-between text-slate-300 hover:bg-slate-700/50">
+            <span><i class="fa-solid fa-code-branch mr-2"></i>Gerunds & Infinitives</span>
+            <span class="badge text-xs px-2 py-0.5 rounded-full bg-slate-700">6</span>
+          </button>
+          <button data-cat="opinions" class="cat-btn w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition flex items-center justify-between text-slate-300 hover:bg-slate-700/50">
+            <span><i class="fa-solid fa-comment-dots mr-2"></i>Opinion Expressions</span>
+            <span class="badge text-xs px-2 py-0.5 rounded-full bg-slate-700">4</span>
+          </button>
+          <button data-cat="writing" class="cat-btn w-full text-left px-3 py-2 rounded-xl text-sm font-medium transition flex items-center justify-between text-slate-300 hover:bg-slate-700/50">
+            <span><i class="fa-solid fa-pen-to-square mr-2"></i>Escritura / Producción</span>
+            <span class="badge text-xs px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-400">10</span>
+          </button>
+        </nav>
+
+        <div class="mt-6 pt-4 border-t border-slate-700/60">
+          <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+            <span>Progreso Total</span>
+            <span id="progress-percent">0%</span>
+          </div>
+          <div class="w-full bg-slate-700/60 h-2 rounded-full overflow-hidden">
+            <div id="progress-bar" class="bg-gradient-to-r from-sky-500 to-indigo-500 h-full w-0 transition-all duration-300"></div>
+          </div>
+        </div>
+
+        <button id="reset-btn" class="w-full mt-4 px-3 py-2 rounded-xl border border-slate-600 hover:bg-slate-700/50 text-xs font-semibold text-slate-300 transition flex items-center justify-center space-x-2">
+          <i class="fa-solid fa-rotate-right"></i>
+          <span>Reiniciar Cuestionario</span>
+        </button>
+      </div>
+
+      <!-- Cheatsheet Quick Reference -->
+      <div class="bg-slate-800/60 border border-slate-700/40 rounded-2xl p-4 text-xs space-y-3">
+        <h3 class="font-bold text-sky-400 flex items-center">
+          <i class="fa-solid fa-bolt mr-2"></i>Recordatorio Rápido
+        </h3>
+        <p class="text-slate-300"><strong>Pasiva:</strong> Sujeto + <i>has/have been</i> + V3 (Participio)</p>
+        <p class="text-slate-300"><strong>-ed / -ing:</strong> -ed = cómo se siente alguien / -ing = característica de algo.</p>
+        <p class="text-slate-300"><strong>Infinitive:</strong> <i>to + verb</i> (propósito). <strong>Gerund:</strong> <i>verb + ing</i> (sustantivo).</p>
+      </div>
+    </aside>
+
+    <!-- Quiz Content Container -->
+    <section class="lg:col-span-3 space-y-6">
+      
+      <!-- Welcome / Instructions Card -->
+      <div id="quiz-header" class="bg-gradient-to-r from-slate-800 via-slate-800 to-slate-800/90 border border-slate-700/60 rounded-2xl p-5 shadow-xl relative overflow-hidden">
+        <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-sky-500/10 rounded-full blur-2xl"></div>
+        <h2 class="text-xl font-extrabold text-white mb-2">Test de Práctica Intensivo (40 Preguntas)</h2>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Diseñado para repasar todo el temario en una noche. Incluye <strong>30 preguntas de selección múltiple</strong> y <strong>10 de escritura activa</strong> con auto-evaluación inteligente y explicación.
+        </p>
+      </div>
+
+      <!-- Questions List -->
+      <div id="questions-container" class="space-y-6">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+
+      <!-- Final Results Banner (Hidden by default) -->
+      <div id="results-card" class="hidden bg-slate-800 border border-slate-700 rounded-2xl p-6 shadow-2xl text-center space-y-4">
+        <div class="w-16 h-16 mx-auto rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-3xl">
+          <i class="fa-solid fa-award"></i>
+        </div>
+        <h2 class="text-2xl font-extrabold text-white">¡Has completado la práctica!</h2>
+        <p class="text-slate-300 text-sm max-w-md mx-auto">
+          Tu puntaje final es <span id="final-score" class="font-bold text-sky-400 text-lg">0</span> de 40.
+        </p>
+        <div id="final-feedback" class="p-4 rounded-xl text-sm font-medium max-w-lg mx-auto"></div>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-6 py-2.5 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-xl text-sm transition shadow-lg shadow-sky-500/20">
+          Revisar mis respuestas
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- JavaScript Logic -->
+  <script>
+    // Full Quiz Dataset based on worksheet contents
+    const questionsData = [
+      // --- 1-6: RHETORICAL DEVICES (MCQ) ---
+      {
+        id: 1,
+        category: "rhetorical",
+        type: "mcq",
+        question: "Identify the rhetorical device used in: 'Turtles travel together.'",
+        options: ["Simile", "Alliteration", "Onomatopoeia", "Hyperbole"],
+        answer: 1,
+        explanation: "Es Alliteration (Aliteración) porque repite el sonido consonante inicial ('T') en palabras consecutivas."
+      },
+      {
+        id: 2,
+        category: "rhetorical",
+        type: "mcq",
+        question: "Identify the rhetorical device: 'Click! The smart door opened.'",
+        options: ["Onomatopoeia", "Metaphor", "Repetition", "Hyperbole"],
+        answer: 0,
+        explanation: "Es Onomatopoeia (Onomatopeya) porque 'Click!' es una palabra que imita el sonido real que representa."
+      },
+      {
+        id: 3,
+        category: "rhetorical",
+        type: "mcq",
+        question: "Identify the rhetorical device: 'I have a million messages to read.'",
+        options: ["Simile", "Metaphor", "Hyperbole", "Alliteration"],
+        answer: 2,
+        explanation: "Es Hyperbole (Hipérbole) porque exagera la cantidad de mensajes ('un millón') para causar un efecto expresivo."
+      },
+      {
+        id: 4,
+        category: "rhetorical",
+        type: "mcq",
+        question: "Identify the rhetorical device: 'The internet is a window to the world.'",
+        options: ["Simile", "Metaphor", "Onomatopoeia", "Repetition"],
+        answer: 1,
+        explanation: "Es Metaphor (Metáfora) porque afirma directamente que el internet 'es' una ventana, comparando dos cosas sin usar 'like' o 'as'."
+      },
+      {
+        id: 5,
+        category: "rhetorical",
+        type: "mcq",
+        question: "Identify the rhetorical device: 'The new camera is as light as a feather.'",
+        options: ["Simile", "Metaphor", "Hyperbole", "Alliteration"],
+        answer: 0,
+        explanation: "Es Simile (Símil) porque compara dos cosas utilizando la estructura 'as... as' (tan... como)."
+      },
+      {
+        id: 6,
+        category: "rhetorical",
+        type: "mcq",
+        question: "Identify the rhetorical device: 'Safe streets, safe schools, safe cities.'",
+        options: ["Alliteration", "Repetition", "Simile", "Metaphor"],
+        answer: 1,
+        explanation: "Es Repetition (Repetición) porque repite la misma palabra ('safe') deliberadamente para dar énfasis."
+      },
+
+      // --- 7-12: PRESENT PERFECT PASSIVE (MCQ) ---
+      {
+        id: 7,
+        category: "passive",
+        type: "mcq",
+        question: "Complete: 'A smart watch _______ by the company.'",
+        options: ["has created", "has been created", "have been created", "was create"],
+        answer: 1,
+        explanation: "'A smart watch' es singular, por lo que requiere 'has been' seguido del participio pasado 'created'."
+      },
+      {
+        id: 8,
+        category: "passive",
+        type: "mcq",
+        question: "Complete: 'Several robots _______ in modern factories.'",
+        options: ["have been used", "has been used", "have being used", "has used"],
+        answer: 0,
+        explanation: "'Several robots' es sujeto plural, por lo que usamos 'have been' + V3 ('used')."
+      },
+      {
+        id: 9,
+        category: "passive",
+        type: "mcq",
+        question: "Complete: 'The new software _______ by the developers.'",
+        options: ["have been tested", "has been tested", "has testing", "were tested"],
+        answer: 1,
+        explanation: "'The new software' es un sustantivo incontable/singular, así que corresponde 'has been tested'."
+      },
+      {
+        id: 10,
+        category: "passive",
+        type: "mcq",
+        question: "Active: 'The students have downloaded the files.' -> Passive option:",
+        options: [
+          "The files have downloaded by the students.",
+          "The files has been downloaded by the students.",
+          "The files have been downloaded by the students."
+        ],
+        answer: 2,
+        explanation: "'The files' es plural, por lo que lleva 'have been downloaded by...'."
+      },
+      {
+        id: 11,
+        category: "passive",
+        type: "mcq",
+        question: "Active: 'A student has opened the digital book.' -> Select correct Passive form:",
+        options: [
+          "The digital book has been opened by a student.",
+          "The digital book have been opened by a student.",
+          "The digital book has opened by a student."
+        ],
+        answer: 0,
+        explanation: "'The digital book' es singular -> 'has been opened by...'."
+      },
+      {
+        id: 12,
+        category: "passive",
+        type: "mcq",
+        question: "Active: 'Technicians have checked the school computers.' -> Select correct Passive form:",
+        options: [
+          "The school computers has been checked by technicians.",
+          "The school computers have been checked by technicians.",
+          "The school computers were being checked by technicians."
+        ],
+        answer: 1,
+        explanation: "'The school computers' es plural -> 'have been checked'."
+      },
+
+      // --- 13-20: VOCABULARY (MCQ) ---
+      {
+        id: 13,
+        category: "vocab",
+        type: "mcq",
+        question: "The factory is ________ because robots control all the machines.",
+        options: ["harmful", "automated", "predictable", "endangered"],
+        answer: 1,
+        explanation: "'Automated' (Automatizado) significa controlado por máquinas o robots."
+      },
+      {
+        id: 14,
+        category: "vocab",
+        type: "mcq",
+        question: "Employees may need to ________ when their jobs change due to new technologies.",
+        options: ["retrain", "waste", "pollinate", "dispersal"],
+        answer: 0,
+        explanation: "'Retrain' (Reconvertirse / Capacitarse de nuevo) es aprender nuevas habilidades para un empleo."
+      },
+      {
+        id: 15,
+        category: "vocab",
+        type: "mcq",
+        question: "A ________ system can help drivers find directions to a hospital.",
+        options: ["USB flash drive", "floppy disk", "GPS", "waste"],
+        answer: 2,
+        explanation: "GPS system es la tecnología utilizada para obtener direcciones e itinerarios de navegación."
+      },
+      {
+        id: 16,
+        category: "vocab",
+        type: "mcq",
+        question: "Bees and butterflies are crucial ________ for many flowering plants.",
+        options: ["pollinators", "pollutions", "dispersals", "soil health"],
+        answer: 0,
+        explanation: "'Pollinators' (Polinizadores) son los animales que ayudan a la reproducción vegetal."
+      },
+      {
+        id: 17,
+        category: "vocab",
+        type: "mcq",
+        question: "Birds help with seed ________ when they drop seeds in new places.",
+        options: ["dispersal", "inequality", "manufacturing", "conservation"],
+        answer: 0,
+        explanation: "'Seed dispersal' (Dispersión de semillas) se refiere al traslado de semillas a nuevos territorios."
+      },
+      {
+        id: 18,
+        category: "vocab",
+        type: "mcq",
+        question: "Plastic accumulation can be highly ________ to marine animals.",
+        options: ["portable", "harmful", "predictable", "automated"],
+        answer: 1,
+        explanation: "'Harmful' significa dañino o nocivo."
+      },
+      {
+        id: 19,
+        category: "vocab",
+        type: "mcq",
+        question: "Recycling materials significantly reduces the amount of ________ in landfills.",
+        options: ["waste", "fresh water", "ecosystem", "income"],
+        answer: 0,
+        explanation: "'Waste' significa residuos o desechos no deseados."
+      },
+      {
+        id: 20,
+        category: "vocab",
+        type: "mcq",
+        question: "Large differences in salaries between workers represent ________.",
+        options: ["advanced manufacturing", "income inequality", "day-to-day tasks", "soil health"],
+        answer: 1,
+        explanation: "'Income inequality' (Desigualdad de ingresos) describe grandes disparidades en lo que gana la gente."
+      },
+
+      // --- 21-26: GERUNDS / INFINITIVES / ADJECTIVES (MCQ) ---
+      {
+        id: 21,
+        category: "grammar",
+        type: "mcq",
+        question: "We need ________ (save) clean water for future generations.",
+        options: ["saving", "to save", "saved", "save"],
+        answer: 1,
+        explanation: "El verbo 'need' va seguido de infinitivo con 'to' (to save) para indicar propósito o necesidad."
+      },
+      {
+        id: 22,
+        category: "grammar",
+        type: "mcq",
+        question: "The conservation group works ________ (protect) local native birds.",
+        options: ["to protect", "protecting", "protected", "protect"],
+        answer: 0,
+        explanation: "Expresa un propósito explícito ('para proteger'), por lo que se requiere un infinitivo: 'to protect'."
+      },
+      {
+        id: 23,
+        category: "grammar",
+        type: "mcq",
+        question: "________ (plant) trees improves urban green spaces and air quality.",
+        options: ["Plant", "Planted", "Planting", "To planting"],
+        answer: 2,
+        explanation: "Al inicio de la oración como sujeto verbal se utiliza un gerundio ('Planting')."
+      },
+      {
+        id: 24,
+        category: "grammar",
+        type: "mcq",
+        question: "Protecting endangered bees is an ________ (inspire) idea.",
+        options: ["inspired", "inspiring", "inspire", "inspiration"],
+        answer: 1,
+        explanation: "Buscamos un adjetivo en -ing ('inspiring') porque describe la característica de la idea."
+      },
+      {
+        id: 25,
+        category: "grammar",
+        type: "mcq",
+        question: "The children feel very ________ (excite) about creating a community garden.",
+        options: ["exciting", "excited", "excite", "excitement"],
+        answer: 1,
+        explanation: "Usamos el adjetivo con terminación -ed ('excited') para describir el sentimiento de las personas."
+      },
+      {
+        id: 26,
+        category: "grammar",
+        type: "mcq",
+        question: "Many students are ________ (concern) about plastic pollution in oceans.",
+        options: ["concerning", "concern", "concerned", "concerns"],
+        answer: 2,
+        explanation: "Se usa '-ed' ('concerned') para reflejar la emoción/estado que sienten los estudiantes."
+      },
+
+      // --- 27-30: OPINION EXPRESSIONS (MCQ) ---
+      {
+        id: 27,
+        category: "opinions",
+        type: "mcq",
+        question: "Complete: '________ my point of view, technology improves learning efficiency.'",
+        options: ["From", "In", "At", "On"],
+        answer: 0,
+        explanation: "La expresión fija correcta es 'From my point of view' (Desde mi punto de vista)."
+      },
+      {
+        id: 28,
+        category: "opinions",
+        type: "mcq",
+        question: "Complete: 'It is clear ________ me that social media requires responsible usage.'",
+        options: ["for", "to", "with", "about"],
+        answer: 1,
+        explanation: "La expresión fija correcta es 'It is clear to me that...' (Me queda claro que...)."
+      },
+      {
+        id: 29,
+        category: "opinions",
+        type: "mcq",
+        question: "Choose the complete structure: '________ people say AI will replace jobs, ________ I think it will create new opportunities.'",
+        options: [
+          "Some / but",
+          "From / to",
+          "I strongly / agree",
+          "Clear / that"
+        ],
+        answer: 0,
+        explanation: "La estructura de contraste es: 'Some people say that..., BUT I think that...'."
+      },
+      {
+        id: 30,
+        category: "opinions",
+        type: "mcq",
+        question: "Complete: 'I strongly ________ that password sharing online is dangerous.'",
+        options: ["agree", "opinion", "view", "clear"],
+        answer: 0,
+        explanation: "Se utiliza 'I strongly agree that...' (Estoy totalmente de acuerdo en que...)."
+      },
+
+      // --- 31-40: WRITING / PRODUCTION (SENTENCE CREATION) ---
+      {
+        id: 31,
+        category: "writing",
+        type: "writing",
+        question: "Rewrite in Present Perfect Passive: 'The company has sent the new devices to the school.'",
+        prompt: "Sujeto pasivo: 'The new devices...'",
+        modelAnswer: "The new devices have been sent to the school by the company.",
+        keywords: ["the new devices", "have been sent", "to the school"],
+        explanation: "'The new devices' es plural, requiere 'have been sent'."
+      },
+      {
+        id: 32,
+        category: "writing",
+        type: "writing",
+        question: "Rewrite in Present Perfect Passive: 'Engineers have programmed a robot to carry materials.'",
+        prompt: "Sujeto pasivo: 'A robot...'",
+        modelAnswer: "A robot has been programmed to carry materials by engineers.",
+        keywords: ["a robot", "has been programmed"],
+        explanation: "'A robot' es singular, requiere 'has been programmed'."
+      },
+      {
+        id: 33,
+        category: "writing",
+        type: "writing",
+        question: "Rewrite in Present Perfect Passive: 'Scientists have studied the impact of water pollution.'",
+        prompt: "Sujeto pasivo: 'The impact of water pollution...'",
+        modelAnswer: "The impact of water pollution has been studied by scientists.",
+        keywords: ["impact", "has been studied"],
+        explanation: "'The impact' es singular -> 'has been studied'."
+      },
+      {
+        id: 34,
+        category: "writing",
+        type: "writing",
+        question: "Write an opinion sentence using the connector 'From my point of view' about technology in class.",
+        prompt: "Ejemplo esperado: From my point of view, technology is useful for learning.",
+        modelAnswer: "From my point of view, technology helps students learn better.",
+        keywords: ["from my point of view"],
+        explanation: "Asegúrate de haber iniciado con 'From my point of view,' seguido de tu opinión."
+      },
+      {
+        id: 35,
+        category: "writing",
+        type: "writing",
+        question: "Write an opinion sentence using 'I strongly agree that...' about protecting endangered animals.",
+        prompt: "Ejemplo: I strongly agree that we must protect endangered species.",
+        modelAnswer: "I strongly agree that protecting endangered animals is essential.",
+        keywords: ["i strongly agree that"],
+        explanation: "Verifica haber escrito 'I strongly agree that' de forma exacta."
+      },
+      {
+        id: 36,
+        category: "writing",
+        type: "writing",
+        question: "Create a sentence using an Infinitive structure (to + verb) explaining why we recycle.",
+        prompt: "Ejemplo: We recycle plastic to protect the environment.",
+        modelAnswer: "People recycle waste to reduce pollution.",
+        keywords: ["to"],
+        explanation: "Debes incluir 'to + verbo' (ej. to protect, to reduce, to save)."
+      },
+      {
+        id: 37,
+        category: "writing",
+        type: "writing",
+        question: "Create a sentence starting with a Gerund (verb + ing) as the subject about water filtering.",
+        prompt: "Ejemplo: Filtering water is important for health.",
+        modelAnswer: "Filtering water helps to provide clean fresh water.",
+        keywords: ["filtering"],
+        explanation: "La oración debe iniciar con 'Filtering water...' como sustantivo/sujeto."
+      },
+      {
+        id: 38,
+        category: "writing",
+        type: "writing",
+        question: "Combine into one sentence using an '-ed' or '-ing' adjective: 'Recycling is a process. It is interesting.'",
+        prompt: "Ejemplo: Recycling is an interesting process.",
+        modelAnswer: "Recycling is an interesting process.",
+        keywords: ["interesting"],
+        explanation: "'Interesting' es el adjetivo -ing que describe la característica del proceso."
+      },
+      {
+        id: 39,
+        category: "writing",
+        type: "writing",
+        question: "Write a sentence using the vocabulary word 'automated' or 'day-to-day tasks'.",
+        prompt: "Ejemplo: Robots do day-to-day tasks in factories.",
+        modelAnswer: "Automated machines perform day-to-day tasks quickly.",
+        keywords: ["automated", "day-to-day tasks"],
+        explanation: "Debes haber usado 'automated' o 'day-to-day tasks' con coherencia."
+      },
+      {
+        id: 40,
+        category: "writing",
+        type: "writing",
+        question: "Write a complete opinion paragraph (at least 15-20 words) on 'Water Pollution' or 'Endangered Species' using an opinion expression.",
+        prompt: "Incluye: 1 expresión de opinión + problema ambiental.",
+        modelAnswer: "It is clear to me that water pollution is a serious problem because waste harms marine life and fresh water sources.",
+        keywords: ["water", "pollution", "endangered", "clear", "opinion", "agree", "think"],
+        explanation: "Revisa que incluya una expresión de opinión vista en la unidad y trate sobre contaminación o animales en peligro."
+      }
+    ];
+
+    // State Management
+    let userAnswers = {}; // { qId: answerIndex or userString }
+    let selfEvaluations = {}; // { qId: true/false } for writing questions
+    let filterCategory = 'all';
+    let timerInterval = null;
+    let secondsElapsed = 0;
+
+    // DOM Elements
+    const questionsContainer = document.getElementById('questions-container');
+    const scoreCounter = document.getElementById('score-counter');
+    const progressBar = document.getElementById('progress-bar');
+    const progressPercent = document.getElementById('progress-percent');
+    const resetBtn = document.getElementById('reset-btn');
+    const categoryBtns = document.querySelectorAll('.cat-btn');
+
+    // Init App
+    document.addEventListener('DOMContentLoaded', () => {
+      startTimer();
+      renderQuestions();
+      setupCategoryFilters();
+    });
+
+    // Timer functionality
+    function startTimer() {
+      clearInterval(timerInterval);
+      secondsElapsed = 0;
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        const mins = Math.floor(secondsElapsed / 60).toString().padStart(2, '0');
+        const secs = (secondsElapsed % 60).toString().padStart(2, '0');
+        document.getElementById('timer').textContent = `${mins}:${secs}`;
+      }, 1000);
+    }
+
+    // Category Filter Handler
+    function setupCategoryFilters() {
+      categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          categoryBtns.forEach(b => {
+            b.classList.remove('bg-sky-500/10', 'text-sky-400', 'border', 'border-sky-500/30');
+            b.classList.add('text-slate-300');
+          });
+          btn.classList.add('bg-sky-500/10', 'text-sky-400', 'border', 'border-sky-500/30');
+          btn.classList.remove('text-slate-300');
+
+          filterCategory = btn.getAttribute('data-cat');
+          renderQuestions();
+        });
+      });
+    }
+
+    // Main Render Function
+    function renderQuestions() {
+      questionsContainer.innerHTML = '';
+
+      const filtered = questionsData.filter(q => {
+        if (filterCategory === 'all') return true;
+        return q.category === filterCategory;
+      });
+
+      if (filtered.length === 0) {
+        questionsContainer.innerHTML = `<div class="text-center py-12 text-slate-400">No hay preguntas en esta categoría.</div>`;
+        return;
+      }
+
+      filtered.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = "bg-slate-800 border border-slate-700/80 rounded-2xl p-5 shadow-lg transition-all duration-200 relative";
+        card.id = `q-card-${q.id}`;
+
+        if (q.type === 'mcq') {
+          card.innerHTML = renderMCQ(q, idx);
+        } else {
+          card.innerHTML = renderWriting(q, idx);
+        }
+
+        questionsContainer.appendChild(card);
+      });
+
+      updateScoreAndProgress();
+    }
+
+    // Render Multiple Choice Question
+    function renderMCQ(q, idx) {
+      const answered = userAnswers.hasOwnProperty(q.id);
+      const selectedOpt = userAnswers[q.id];
+
+      let optionsHTML = '';
+      q.options.forEach((opt, oIdx) => {
+        let btnClasses = "w-full text-left p-3.5 rounded-xl border text-sm font-medium transition flex items-center justify-between ";
+        let badgeHTML = '';
+
+        if (!answered) {
+          btnClasses += "border-slate-700 bg-slate-900/50 hover:bg-slate-700/60 hover:border-slate-500 text-slate-200";
+        } else {
+          if (oIdx === q.answer) {
+            btnClasses += "border-emerald-500 bg-emerald-500/10 text-emerald-300 font-semibold";
+            badgeHTML = `<span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold"><i class="fa-solid fa-check mr-1"></i> Correcta</span>`;
+          } else if (selectedOpt === oIdx) {
+            btnClasses += "border-rose-500 bg-rose-500/10 text-rose-300";
+            badgeHTML = `<span class="text-xs px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 font-bold"><i class="fa-solid fa-xmark mr-1"></i> Tu opción</span>`;
+          } else {
+            btnClasses += "border-slate-800 bg-slate-900/30 text-slate-500 opacity-60";
+          }
+        }
+
+        optionsHTML += `
+          <button onclick="handleMCQSelect(${q.id}, ${oIdx})" ${answered ? 'disabled' : ''} class="${btnClasses}">
+            <span>${String.fromCharCode(65 + oIdx)}. ${opt}</span>
+            ${badgeHTML}
+          </button>
+        `;
+      });
+
+      let feedbackHTML = '';
+      if (answered) {
+        const isCorrect = selectedOpt === q.answer;
+        feedbackHTML = `
+          <div class="mt-4 p-3.5 rounded-xl text-xs leading-relaxed border ${isCorrect ? 'bg-emerald-950/40 border-emerald-500/30 text-emerald-200' : 'bg-rose-950/40 border-rose-500/30 text-rose-200'}">
+            <strong class="block mb-1 text-sm">${isCorrect ? '¡Excelente!' : 'Explicación de repaso:'}</strong>
+            ${q.explanation}
+          </div>
+        `;
+      }
+
+      return `
+        <div class="flex items-start justify-between gap-4 mb-3">
+          <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-500/20 uppercase tracking-wider">
+            Pregunta ${q.id} / 40
+          </span>
+          <span class="text-xs text-slate-400 flex items-center">
+            <i class="fa-solid fa-list-check mr-1"></i> Selección Múltiple
+          </span>
+        </div>
+        <h3 class="text-base font-semibold text-slate-100 mb-4 leading-snug">${q.question}</h3>
+        <div class="space-y-2.5">
+          ${optionsHTML}
+        </div>
+        ${feedbackHTML}
+      `;
+    }
+
+    // Render Writing/Production Question
+    function renderWriting(q, idx) {
+      const answered = userAnswers.hasOwnProperty(q.id);
+      const userText = userAnswers[q.id] || '';
+      const selfEval = selfEvaluations[q.id];
+
+      let evalSection = '';
+      if (answered) {
+        evalSection = `
+          <div class="mt-4 pt-4 border-t border-slate-700/60 space-y-3">
+            <div class="bg-slate-900/80 p-3.5 rounded-xl border border-indigo-500/30">
+              <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block mb-1">Respuesta Modelo Sugerida:</span>
+              <p class="text-sm font-mono text-emerald-300 font-medium">${q.modelAnswer}</p>
+              <p class="text-xs text-slate-400 mt-2"><strong>Explicación:</strong> ${q.explanation}</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 bg-slate-900/40 p-3 rounded-xl border border-slate-700">
+              <span class="text-xs text-slate-300 font-medium">¿Tu respuesta es correcta o equivalente?</span>
+              <div class="flex items-center space-x-2">
+                <button onclick="handleSelfEval(${q.id}, true)" class="px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center ${selfEval === true ? 'bg-emerald-500 text-white' : 'bg-slate-800 text-slate-300 hover:bg-emerald-600/30'}">
+                  <i class="fa-solid fa-check mr-1"></i> Correcta (+1 pts)
+                </button>
+                <button onclick="handleSelfEval(${q.id}, false)" class="px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center ${selfEval === false ? 'bg-rose-500 text-white' : 'bg-slate-800 text-slate-300 hover:bg-rose-600/30'}">
+                  <i class="fa-solid fa-xmark mr-1"></i> Incorrecta (0 pts)
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="flex items-start justify-between gap-4 mb-3">
+          <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 uppercase tracking-wider">
+            Pregunta ${q.id} / 40 (Escritura)
+          </span>
+          <span class="text-xs text-indigo-300 flex items-center">
+            <i class="fa-solid fa-pen-to-square mr-1"></i> Producción en Inglés
+          </span>
+        </div>
+        <h3 class="text-base font-semibold text-slate-100 mb-2 leading-snug">${q.question}</h3>
+        <p class="text-xs text-slate-400 mb-3 italic">${q.prompt}</p>
+
+        <div class="space-y-3">
+          <textarea 
+            id="input-${q.id}"
+            rows="2"
+            placeholder="Escribe tu respuesta en inglés aquí..."
+            class="w-full bg-slate-900/90 border border-slate-700 rounded-xl p-3 text-sm text-slate-100 focus:outline-none focus:border-indigo-500 transition resize-none"
+            ${answered ? 'readonly' : ''}
+          >${userText}</textarea>
+
+          ${!answered ? `
+            <button onclick="handleWritingSubmit(${q.id})" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-xs font-semibold transition flex items-center shadow-lg shadow-indigo-600/20">
+              <i class="fa-solid fa-paper-plane mr-1.5"></i> Comprobar Respuesta
+            </button>
+          ` : ''}
+        </div>
+
+        ${evalSection}
+      `;
+    }
+
+    // Action Handlers
+    window.handleMCQSelect = function(qId, optionIdx) {
+      userAnswers[qId] = optionIdx;
+      renderQuestions();
+    };
+
+    window.handleWritingSubmit = function(qId) {
+      const inputEl = document.getElementById(`input-${qId}`);
+      const val = inputEl ? inputEl.value.trim() : '';
+
+      if (!val) {
+        alert('Por favor escribe tu oración antes de revisar.');
+        return;
+      }
+
+      userAnswers[qId] = val;
+
+      // Smart Auto-checking hint: check if key words match
+      const q = questionsData.find(item => item.id === qId);
+      const lowerVal = val.toLowerCase();
+      const autoMatch = q.keywords.every(kw => lowerVal.includes(kw.toLowerCase()));
+
+      selfEvaluations[qId] = autoMatch; // default recommendation
+
+      renderQuestions();
+    };
+
+    window.handleSelfEval = function(qId, isCorrect) {
+      selfEvaluations[qId] = isCorrect;
+      renderQuestions();
+    };
+
+    // Score & Progress Calculation
+    function updateScoreAndProgress() {
+      let totalScore = 0;
+      let answeredCount = Object.keys(userAnswers).length;
+
+      questionsData.forEach(q => {
+        if (q.type === 'mcq') {
+          if (userAnswers[q.id] === q.answer) {
+            totalScore += 1;
+          }
+        } else {
+          if (selfEvaluations[q.id] === true) {
+            totalScore += 1;
+          }
+        }
+      });
+
+      scoreCounter.textContent = totalScore;
+      const pct = Math.round((answeredCount / questionsData.length) * 100);
+      progressBar.style.width = `${pct}%`;
+      progressPercent.textContent = `${pct}%`;
+
+      // Show final results banner if all 40 questions are answered
+      const resultsCard = document.getElementById('results-card');
+      if (answeredCount === questionsData.length) {
+        resultsCard.classList.remove('hidden');
+        document.getElementById('final-score').textContent = totalScore;
+
+        const feedbackEl = document.getElementById('final-feedback');
+        if (totalScore >= 35) {
+          feedbackEl.className = "p-4 rounded-xl text-sm font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
+          feedbackEl.innerHTML = "¡Excelente preparación! Dominas muy bien el vocabulario, la voz pasiva y las estructuras gramaticales. ¡Irás seguro a la prueba!";
+        } else if (totalScore >= 26) {
+          feedbackEl.className = "p-4 rounded-xl text-sm font-medium bg-sky-500/20 text-sky-300 border border-sky-500/40";
+          feedbackEl.innerHTML = "¡Buen trabajo! Tienes un buen nivel. Te recomendamos repasar las explicaciones de las preguntas donde fallaste antes de tu examen.";
+        } else {
+          feedbackEl.className = "p-4 rounded-xl text-sm font-medium bg-amber-500/20 text-amber-300 border border-amber-500/40";
+          feedbackEl.innerHTML = "Necesitas reforzar algunos contenidos clave (especialmente la estructura Present Perfect Passive y los adjetivos -ed/-ing). ¡Revisa el cuadro de resumen y vuelve a intentarlo!";
+        }
+      } else {
+        resultsCard.classList.add('hidden');
+      }
+    }
+
+    // Reset Quiz
+    resetBtn.addEventListener('click', () => {
+      if (confirm('¿Quieres reiniciar todas las respuestas del test?')) {
+        userAnswers = {};
+        selfEvaluations = {};
+        startTimer();
+        renderQuestions();
+      }
+    });
+  </script>
+</body>
+</html>
